@@ -1,28 +1,29 @@
 import os
 
 class Config:
+    '''
+    General configuration parent class
+    '''
+    pass
 
-# For bblog
-    SECRET_KEY=os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI=os.environ.get('SQLALCHEMY_DATABASE_URI')
-    # SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:Access@localhost/pitches'
-    # SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-# For Quotes
-    # QUOTES_API_BASE_URL ='http://quotes.stormconsultancy.co.uk/random.json'
-    # QUOTES_API_KEY = os.environ.get('QUOTES_API_KEY')
-    # SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 class ProdConfig(Config):
+    '''
+    Production  configuration child class
+
+    Args:
+        Config: The parent configuration class with General configuration settings
+    '''
     pass
 
 
 class DevConfig(Config):
+    '''
+    Development  configuration child class
+
+    Args:
+        Config: The parent configuration class with General configuration settings
+    '''
+
     DEBUG = True
-
-config_options = {
-'development':DevConfig,
-'production':ProdConfig
-}
-
