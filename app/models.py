@@ -1,7 +1,6 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from . import login_manager
 
 
 class User(UserMixin,db.Model):
@@ -15,6 +14,21 @@ class User(UserMixin,db.Model):
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
     blog = db.relationship('Pitches',backref = 'user',lazy = "dynamic")
+
+
+    @property
+    def password(self):
+        raise AttributeError('You can only read this attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_encrypt = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_encrypt, password)
+
+    def __repr__(self):
+        return f'User{self.username}'
 
 
 # for blog
