@@ -4,7 +4,7 @@ Jerusha Otieno
 
 # Description
 
-This is a python/flask personal blogging website allowing the writer to create and share their opinions with users. The writer can sign into the blog, create a new blog post, delete insulting/degradin user comments, and to update and delete blogs created. Users can view blog posts on the site, comment on them, view the most recent blogs and view random qquotes on the site. The users also get an email alert when a new post is made by joining a subscription. 
+This is a python/flask personal blogging website allowing the writer to create and share their opinions with users. The writer can sign into the blog, create a new blog post, delete insulting/degrading user comments, and to update and delete blogs created. Users can view blog posts on the site, comment on them, view the most recent blogs and view random qquotes on the site. The users also get an email alert when a new post is made by joining a subscription. 
 
 # Live Link
 
@@ -62,7 +62,7 @@ python3 manage.py test
 
 # Technology Used
 
-* Python3.6
+* Python3.8
 * Flask
 * Heroku
 * Bootstrap
