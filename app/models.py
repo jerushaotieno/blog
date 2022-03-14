@@ -1,7 +1,24 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from . import login_manager
 
+
+
+# for role
+
+class Role(db.Model):
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+    users = db.relationship('User',backref = 'role',lazy="dynamic")
+
+    def __repr__(self):
+        return f'User {self.name}'
+
+
+# for user
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
@@ -13,7 +30,7 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     password_hash = db.Column(db.String(255))
-    blog = db.relationship('Pitches',backref = 'user',lazy = "dynamic")
+    blog = db.relationship('Blog',backref = 'user',lazy = "dynamic")
 
 
     @property
@@ -24,11 +41,14 @@ class User(UserMixin,db.Model):
     def password(self, password):
         self.password_encrypt = generate_password_hash(password)
 
-    def check_password(self, password):
+    def veriify_password(self, password):
         return check_password_hash(self.password_encrypt, password)
 
     def __repr__(self):
         return f'User{self.username}'
+
+
+
 
 
 # for blog
@@ -79,3 +99,8 @@ class Comments(db.Model):
 
     def __repr__(self):
         return f'User{self.username}'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
