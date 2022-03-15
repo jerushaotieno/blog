@@ -1,5 +1,8 @@
 import os
 
+app = Flask(__name__)
+app.secret_key = settings.SECRET_KEY
+
 class Config:
     '''
     General configuration parent class
