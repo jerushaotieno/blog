@@ -14,6 +14,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:Access@localhost/blog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+
 
 
 class ProdConfig(Config):
