@@ -1,15 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField, BooleanField
-from wtforms.validators import DataRequired,Email,EqualTo
+from wtforms.validators import InputRequired,Email,EqualTo, ValidationError
+from werkzeug.security import generate_password_hash, check_password_hash
 from ..models import User
-from wtforms import ValidationError
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField('Your Email Address',validators=[DataRequired(),Email()])
-    username = StringField('Enter your username',validators = [DataRequired()])
-    password = PasswordField('Password',validators = [DataRequired(), EqualTo('password_confirm',message = 'Passwords must match')])
-    password_confirm = PasswordField('Confirm Passwords',validators = [DataRequired()])
+    email = StringField('Your Email Address',validators=[InputRequired(),Email()])
+    username = StringField('Enter your username',validators = [InputRequired()])
+    password = PasswordField('Password',validators = [InputRequired()])
+    confirm_password = PasswordField('Confirm Passwords',validators = [InputRequired(), EqualTo('password')])
     submit = SubmitField('Sign Up')
     
     def validate_email(self,data_field):
@@ -22,7 +22,11 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Your Email Address',validators=[DataRequired(),Email()])
-    password = PasswordField('Password',validators =[DataRequired()])
+    email = StringField('Your Email Address',validators=[InputRequired(),Email()])
+    password = PasswordField('Password',validators =[InputRequired()])
     remember = BooleanField('Remember me')
-    submit = SubmitField('Sign In')            
+    submit = SubmitField('Sign In')    
+
+    def verify_password(pass_hash, password):
+        return check_password_hash(pass_hash, password) 
+    

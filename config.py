@@ -1,7 +1,7 @@
 import os
 
-app = Flask(__name__)
-app.secret_key = settings.SECRET_KEY
+# app = Flask(__name__)
+# app.secret_key = settings.SECRET_KEY
 
 class Config:
     '''
@@ -9,7 +9,7 @@ class Config:
     '''
     pass
 
-    SECRET_KEY=os.environ.get('SECRET_KEY')
+    SECRET_KEY='mysecretkey'
     # SQLALCHEMY_DATABASE_URI=os.environ.get('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:Access@localhost/blog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -20,8 +20,8 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_USERNAME = 'wajowriting@gmail.com'
+    MAIL_PASSWORD = 'skillsetsmatter2000'
 
 
 
@@ -44,6 +44,14 @@ class DevConfig(Config):
     '''
 
     DEBUG = True
+
+
+class Config:
+    # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
+
+
 
 config_options = {
 'development' : DevConfig,

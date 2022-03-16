@@ -1,10 +1,18 @@
 from wtforms.validators import DataRequired, Email
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField, TextAreaField, DateField, SelectField
+from wtforms import StringField,SubmitField, TextAreaField, DateField, SelectField,BooleanField,PasswordField
 from ..models import User
 from wtforms import ValidationError
 
 #Edit profile
+
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[DataRequired(),Email()])
+    password = PasswordField('Password',validators =[DataRequired()])
+    remember = BooleanField('Remember me')
+    submit = SubmitField('Sign In')            
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [DataRequired()])
@@ -13,7 +21,7 @@ class UpdateProfile(FlaskForm):
 
 # user subscription
 
-class SubscribedUserForm(FlaskForm):
+class SubscriberForm(FlaskForm):
     email = StringField('Enter your email address to subscribe to our blog',validators=[DataRequired(),Email()])
     submit = SubmitField('Subscribe')
 
