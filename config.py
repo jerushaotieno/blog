@@ -9,7 +9,7 @@ class Config:
     '''
     pass
 
-    SECRET_KEY='mysecretkey'
+    SECRET_KEY=os.environ.get('SECRET_KEY')
     # SQLALCHEMY_DATABASE_URI=os.environ.get('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://moringa:Access@localhost/blog'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -23,6 +23,12 @@ class Config:
     MAIL_USERNAME = 'wajowriting@gmail.com'
     MAIL_PASSWORD = 'skillsetsmatter2000'
 
+
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+
+    # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 
 
 class ProdConfig(Config):
@@ -44,13 +50,6 @@ class DevConfig(Config):
     '''
 
     DEBUG = True
-
-
-class Config:
-    # simple mde  configurations
-    SIMPLEMDE_JS_IIFE = True
-    SIMPLEMDE_USE_CDN = True
-
 
 
 config_options = {

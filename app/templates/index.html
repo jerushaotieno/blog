@@ -3,20 +3,45 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 
 
-<div class="container"> 
+{% block content %}
+
+<div class="text-center" style="font-family: 'Great Vibes', cursive; font-size: 50px">
+    <!-- <p style="font-size: large; font-weight: 500;">Blog Alert </p> -->
+    <!-- <p>Your home of daily inspiration and knowledge</p> -->
+</div>
+
+<div class="container" style="font-family: 'Great Vibes', cursive; font-size: 30px;"> 
+
     <div class="row">
-        <div class= "col-md-2"> </div>
-        <div class="col-md-8">
-        <!--Flash message -->
-            {% for message in get_flashed_messages() %}
-            <div class="alert alert-danger">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ message }}
+        
+        <div class="col-md-12">
+            {% for blog in blogs %}
+            <div class="col-md-11">
+                <div class="card" style="background-color: chartreuse; margin: 30px;">
+                    <div class="card-body">
+                        <h4 style="color: blue;"> {{blog.title}} </h4>
+                        <p> {{blog.description}} </p>
+                        <h6 style="color:blue">Author: {{blog.author}}  </h6>
+                    </div>
+                </div>
             </div>
+            
             {% endfor %}
-            <!-- Login form -->
-            {{wtf.quick_form(login)}}
+
+            <div class="col-md-3" style="color:blue;">
+                <!--Flash message -->
+                    {% for message in get_flashed_messages() %}
+                    <div class="alert alert-danger">
+                    <button type="button" class="close" data-dismiss="alert" style="color: chartreuse;">&times;</button>
+                    {{ message }}
+                    </div>
+                    {% endfor %}
+                    <!-- Login form -->
+                    {{wtf.quick_form(form)}}
+                </div>
         </div>
-        <div clas="col-md-2"> </div>
+        
+        
     </div>
 </div>
+{% endblock %}

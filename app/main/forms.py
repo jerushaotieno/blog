@@ -6,14 +6,6 @@ from wtforms import ValidationError
 
 #Edit profile
 
-
-
-class LoginForm(FlaskForm):
-    email = StringField('Your Email Address',validators=[DataRequired(),Email()])
-    password = PasswordField('Password',validators =[DataRequired()])
-    remember = BooleanField('Remember me')
-    submit = SubmitField('Sign In')            
-
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Tell us about you.',validators = [DataRequired()])
     submit = SubmitField('Submit')
@@ -22,7 +14,7 @@ class UpdateProfile(FlaskForm):
 # user subscription
 
 class SubscriberForm(FlaskForm):
-    email = StringField('Enter your email address to subscribe to our blog',validators=[DataRequired(),Email()])
+    email = StringField('Add email',validators=[DataRequired(),Email()])
     submit = SubmitField('Subscribe')
 
     def validate_email(self,data_field):
@@ -35,8 +27,8 @@ class SubscriberForm(FlaskForm):
 class BlogForm(FlaskForm):
     title = StringField('Blog Title ',validators = [DataRequired()])
     description = TextAreaField('Add your blog post ',validators=[DataRequired()])
+    author = StringField('Author Name ',validators = [DataRequired()])
     # postedby = StringField('Posted By: ',validators = [DataRequired()])
-    date = DateField('Posting Date', validators=[DataRequired()])
     submit = SubmitField('Add Blog')
 
 
